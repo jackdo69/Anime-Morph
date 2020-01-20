@@ -7,7 +7,7 @@ let toggle = false;
 darkMode.addEventListener("click", () => {
     //We need to use anime.js
     //Here we set up the TIMELINE
-    console.log('click');
+    
     
     const timeline = anime.timeline({
         duration: 750,
@@ -17,7 +17,22 @@ darkMode.addEventListener("click", () => {
     timeline.add({
         targets: ".sun",
         d: [
-            {value: moonPath}
+            {value: toggle ? sunPath : moonPath}
         ]
     })
+    .add({
+        targets: "#darkMode",
+        rotate: toggle ? 0 : 320
+    }, '-= 700')
+    .add({
+        targets: "section",
+        backgroundColor: toggle ? 'rgb(255,255,255)' : 'rgb(22,22,22)',
+        color: toggle ? 'rgb(22,22,22)' : 'rgb(255,255,255)'
+    }, '-=700');
+    //Everytime we click on the son, I want toggle to switch
+    if (!toggle) {
+        toggle = true;
+    } else {
+        toggle = false;
+    }
 });
